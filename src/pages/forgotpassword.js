@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
-import logoImage from '../white-logo.png';
-/*import './login.css';*/
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import Login from './login.js';
-import Register from './register.js';
-
-export default React.createClass({
+class Register2 extends React.Component{
 	render() {
-		return (
+		return(
 			<div className="Login">
 
             {/*start of smaller field area*/}
@@ -48,4 +43,6 @@ export default React.createClass({
 			</div>
 		)
 	}
-})
+}
+
+export default Register2

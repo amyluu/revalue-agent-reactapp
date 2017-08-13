@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
-import logoImage from '../white-logo.png';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-import ForgotPassword from './forgotpassword.js';
-import Register from './register.js';
+class Login extends React.Component{
+	AxiosGet() {
+		axios.get('http://54.149.159.111/hello')
+		.then(function (results) {
+		console.log(results.data);
+		})
+	}
 
-export default React.createClass({
 	render() {
-		return (
+		return(
 			<div className="Login">
 
 			  {/*start of smaller field area*/}
 				<div className="row">
 					<div className="col-sm-8 col-centered">
-						<form>
+						{/*<form>*/}
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-user" /></span>
 								<input type="text" className="form-control" placeholder="Username" />
@@ -21,35 +25,38 @@ export default React.createClass({
 							<br />
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-lock" /></span>
-								<input type="password" className="form-control" placeholder="Password" />
+								<input /*type="password"*/ className="form-control" placeholder="Password" />
 							</div>
 							<br />
-							<button type="submit" className="btn btn-block btn-login">LOGIN</button>
-						</form>
+							<button onClick={this.AxiosGet} type="submit" className="btn btn-block btn-login">
+								LOGIN
+							</button>
+						{/*</form>*/}
 					</div>
 				</div>
 
 			  <br />
-
 			  	<div className="row row-footer">
-					<div className="btn-group btn-group-justified" role="group">
-						<div className="btn-group" role="group">
-							<Link to="/forgotpassword">
-								<button type="button" className="btn" id="btn-left">
-									<i className="fa fa-question" /> Forgot Password
-								</button>
-							</Link>
+						<div className="btn-group btn-group-justified" role="group">
+							<div className="btn-group" role="group">
+								<Link to="/forgotpassword">
+									<button type="button" className="btn" id="btn-left">
+										<i className="fa fa-question" /> Forgot Password
+									</button>
+								</Link>
+							</div>
+							<div className="btn-group" role="group">
+								<Link to="/register">
+									<button type="button" className="btn" id="btn-right">
+										<i className="fa fa-pencil" /> Register
+									</button>
+								</Link>
+							</div>
 						</div>
-						<div className="btn-group" role="group">
-							<Link to="/register">
-								<button type="button" className="btn" id="btn-right">
-									<i className="fa fa-pencil" /> Register
-								</button>
-							</Link>
-						</div>
-					</div>
 			  	</div>
 			</div>
-		);
+		)
 	}
-})
+}
+
+export default Login
