@@ -139,5 +139,5 @@ p {
 .row-footer{
 	position: absolute;
 	bottom: 0;
-	width: 513px;
+	width: 100%;
 }

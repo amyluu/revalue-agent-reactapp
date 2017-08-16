@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import history from '../history.js'
 
 class Register2 extends React.Component{
+
 	render() {
 		return(
 			<div className="Login">
@@ -26,14 +28,14 @@ class Register2 extends React.Component{
 		         <div className="btn-group btn-group-justified" role="group">
 		            <div className="btn-group" role="group">
 		              	<Link to="/">
-			               <button type="button" className="btn" id="btn-left">
+			               <button onClick={() => history.push('/')} type="button" className="btn" id="btn-left">
 			               	<i className="fa fa-star" /> Login
 			               </button>
 		              	</Link>
 		            </div>
 		            <div className="btn-group" role="group">
 		              	<Link to="/register">
-		               	<button type="button" className="btn" id="btn-right">
+		               	<button onClick={() => history.push('/register')} type="button" className="btn" id="btn-right">
 		                  	<i className="fa fa-pencil" /> Register
 		               	</button>
 		              	</Link>

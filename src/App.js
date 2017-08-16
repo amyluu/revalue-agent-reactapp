@@ -2,6 +2,7 @@ import React from 'react'
 import logoImage from './white-logo.png'
 import './App.css'
 import { BrowserRouter, Route} from 'react-router-dom'
+import history from './history.js'
 
 import Login from './pages/login.js'
 import ForgotPassword from './pages/forgotpassword.js'
@@ -10,9 +11,14 @@ import Register2 from './pages/register2.js'
 import Axios from './pages/axios.js'
 
 class App extends React.Component{
+  componentDidMount() {
+    history.push('/')
+    console.log('good job')
+  }
+
   render() {
     return(
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <div className="App">
           <div className="container-fluid">
             <div className="row">

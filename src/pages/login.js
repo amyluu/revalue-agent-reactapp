@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import history from '../history.js'
 
 class Login extends React.Component{
 	AxiosGet() {
@@ -9,6 +10,7 @@ class Login extends React.Component{
 		console.log(results.data);
 		})
 	}
+	
 
 	render() {
 		return(
@@ -40,14 +42,14 @@ class Login extends React.Component{
 						<div className="btn-group btn-group-justified" role="group">
 							<div className="btn-group" role="group">
 								<Link to="/forgotpassword">
-									<button type="button" className="btn" id="btn-left">
+									<button onClick={() => history.push('/forgotpassword')} type="button" className="btn" id="btn-left">
 										<i className="fa fa-question" /> Forgot Password
 									</button>
 								</Link>
 							</div>
 							<div className="btn-group" role="group">
 								<Link to="/register">
-									<button type="button" className="btn" id="btn-right">
+									<button onClick={() => history.push('/register')} type="button" className="btn" id="btn-right">
 										<i className="fa fa-pencil" /> Register
 									</button>
 								</Link>
