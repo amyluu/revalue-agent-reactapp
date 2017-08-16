@@ -4,7 +4,6 @@ import history from '../history.js'
 
 class Register extends React.Component{
 
-	
 	render() {
 		return (
 			<div className="Login">
@@ -14,12 +13,31 @@ class Register extends React.Component{
 						<form>
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-user" /></span>
-								<input type="email" className="form-control" placeholder="Email address" />
-							</div><br />
+								<input 
+									type="email" 
+									required
+									title="Please make sure your email is in the format of id@example.com"
+									minLength="5"
+									maxLength="100"
+									className="form-control" 
+									placeholder="Email address" 
+								/>
+							</div>
+
+							<br />
 							
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-unlock-alt" /></span>
-								<input type="password" className="form-control" placeholder="Password" />
+								<input 
+									type="password" 
+									required 
+									className="form-control" 
+									minLength="8"
+									maxLength="30"
+									pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" 
+									title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
+									placeholder="Password" 
+								/>
 							</div><br />
 							
 							<div className="input-group">

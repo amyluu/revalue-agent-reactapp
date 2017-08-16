@@ -12,22 +12,43 @@ class Register2 extends React.Component{
 						<form>
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-user" /></span>
-								<input type="text" className="form-control" placeholder="First name" />
+								<input type="text" required
+									className="form-control" 
+									minLength="2"
+									maxLength="50"
+									placeholder="First name" 
+								/>
 							</div>
 							<p className="small-line-break" />
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-user" /></span>
-								<input type="text" className="form-control" placeholder="Last name" />
+								<input type="text" required 
+									className="form-control" 
+									minLength="2"
+									maxLength="50"
+									placeholder="Last name" 
+								/>
 							</div>
 							<p className="small-line-break" />
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-phone" /></span>
-								<input type="text" className="form-control" placeholder="Phone number" />
+								<input type="tel" 
+									className="form-control" 
+									maxLength="20"
+									pattern="^\d{3}-\d{3}-\d{4}$"
+									title="123-456-7890"
+									placeholder="Phone (123-456-7890)" 
+								/>
 							</div>
 							<p className="small-line-break" />
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-window-maximize" /></span>
-								<input type="text" className="form-control" placeholder="Domain name" />
+								<input 
+									type="url" 
+									className="form-control"
+									title="Include http(s)://" 
+									placeholder="Domain name (http(s)://domain.com)" 
+								/>
 							</div>
 							<p className="small-line-break" />
 							<button type="submit" className="btn btn-block btn-login">Register</button>

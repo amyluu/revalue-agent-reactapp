@@ -10,7 +10,6 @@ class Login extends React.Component{
 		console.log(results.data);
 		})
 	}
-	
 
 	render() {
 		return(
@@ -19,21 +18,42 @@ class Login extends React.Component{
 			  {/*start of smaller field area*/}
 				<div className="row">
 					<div className="col-sm-8 col-centered">
-						{/*<form>*/}
+						<form>
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-user" /></span>
-								<input type="text" className="form-control" placeholder="Username" />
+								<input 
+									className="form-control" 
+									type="email" 
+									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
+									title="Please make sure your email is in the format of id@example.com"
+									minLength="5"
+									maxLength="100"
+									required  
+									name='email'							
+									placeholder="Email address" />
 							</div>
 							<br />
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-lock" /></span>
-								<input /*type="password"*/ className="form-control" placeholder="Password" />
+								<input 
+									type="password" 
+									required 
+									name='password'
+									className="form-control" 
+									minLength="8"
+									maxLength="30"
+									pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" 
+									title="Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
+									placeholder="Password" />
 							</div>
 							<br />
-							<button onClick={this.AxiosGet} type="submit" className="btn btn-block btn-login">
+							<button 
+								onClick={this.AxiosGet} 
+								type="submit" 
+								className="btn btn-block btn-login">
 								LOGIN
 							</button>
-						{/*</form>*/}
+						</form>
 					</div>
 				</div>
 
@@ -42,15 +62,20 @@ class Login extends React.Component{
 						<div className="btn-group btn-group-justified" role="group">
 							<div className="btn-group" role="group">
 								<Link to="/forgotpassword">
-									<button onClick={() => history.push('/forgotpassword')} type="button" className="btn" id="btn-left">
-										<i className="fa fa-question" /> Forgot Password
+									<button 
+										onClick={() => history.push('/forgotpassword')} 
+										type="button" className="btn" id="btn-left">
+											<i className="fa fa-question" /> 
+											Forgot Password
 									</button>
 								</Link>
 							</div>
 							<div className="btn-group" role="group">
 								<Link to="/register">
-									<button onClick={() => history.push('/register')} type="button" className="btn" id="btn-right">
-										<i className="fa fa-pencil" /> Register
+									<button onClick={() => history.push('/register')} 
+										type="button" className="btn" id="btn-right">
+										<i className="fa fa-pencil" /> 
+										Register
 									</button>
 								</Link>
 							</div>
