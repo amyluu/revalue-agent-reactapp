@@ -10,12 +10,15 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "bootstrap": "^3.3.7",
+    "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "history": "^4.6.3",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2",
-    "react-scripts": "1.0.10"
+    "react-scripts": "1.0.10",
+    "validator": "^8.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

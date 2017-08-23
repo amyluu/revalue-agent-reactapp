@@ -9,11 +9,11 @@ import ForgotPassword from './pages/forgotpassword.js'
 import Register from './pages/register.js'
 import Register2 from './pages/register2.js'
 import Axios from './pages/axios.js'
+import Test from './pages/test.js'
 
 class App extends React.Component{
   componentDidMount() {
     history.push('/')
-    console.log('good job')
   }
 
   render() {
@@ -36,6 +36,7 @@ class App extends React.Component{
                     <Route path="/register" component={Register} />
                     <Route path="/register2" component={Register2} />
                     <Route path="/axios" component={Axios} />
+                    <Route path="/test" component={Test} />
                   </div>
                 </div>
 
