@@ -132,7 +132,7 @@ class Register2 extends Component {
 
 						<div className={phoneNumberGroupClass}>
 							<div className="input-group">
-							  <span className="input-group-addon"><i className="fa fa-user" /></span>
+							  <span className="input-group-addon"><i className="fa fa-phone" /></span>
 								<input type="tel" name="phoneNumber" className="form-control"
 									required  maxLength="20"
 								  placeholder="Phone number" value={phoneNumber.value} 
@@ -143,7 +143,7 @@ class Register2 extends Component {
 
 						<div className={domainNameGroupClass}>
 							<div className="input-group">
-							  <span className="input-group-addon"><i className="fa fa-user" /></span>
+							  <span className="input-group-addon"><i className="fa fa-window-maximize" /></span>
 								<input type="text" name="domainName" className="form-control"
 									required  maxLength="100"
 								  placeholder="Website URL" value={domainName.value} 
