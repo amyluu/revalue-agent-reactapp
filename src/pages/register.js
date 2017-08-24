@@ -92,7 +92,7 @@ class Register extends Component {
 						<div className={emailGroupClass}>
 							<div className="input-group">
 							  <span className="input-group-addon"><i className="fa fa-user" /></span>
-								<input type="text" name="email" className="form-control"
+								<input type="text" name="email" className="form-control" required
 								  placeholder="Email address" value={email.value} onChange={this.onChange} autoFocus />
 						  </div>
 						  <span className="help-block">{email.message}</span>
@@ -103,7 +103,7 @@ class Register extends Component {
 								<span className="input-group-addon"><i className="fa fa-unlock-alt" /></span>	
 								<input type="password" name="password" className="form-control"
 							  placeholder="Password" value={password.value} onChange={this.onChange} 
-							  minLength="1" maxLength="30" />
+							  required minLength="1" maxLength="30" />
 							</div>
 							<span className="help-block">{password.message}</span>
 					  </div>
@@ -112,7 +112,7 @@ class Register extends Component {
 							<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-lock" /></span>
 								<input type="password" name="confirmPassword" className="form-control"
-								minLength="1" maxLength="30"
+								required minLength="1" maxLength="30"
 								placeholder="Confirm Password" value={confirmPassword.value} onChange={this.onChange} />
 							</div>
 						<span className="help-block">{confirmPassword.message}</span>
