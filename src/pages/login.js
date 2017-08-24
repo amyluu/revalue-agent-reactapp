@@ -42,7 +42,7 @@ class Login extends Component {
 
 		if (!validator.isEmail(state.email.value)) {
 		  state.email.isValid = false;
-		  state.email.message = 'Not a valid email address';
+		  state.email.message = 'Invalid email address';
 
 		  this.setState(state);
 		  return false;

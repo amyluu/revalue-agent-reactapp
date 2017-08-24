@@ -82,13 +82,19 @@ p {
 	vertical-align: middle;
 	margin-right: 5px;
 }
+
+.help-block {
+	margin-bottom: -2px;
+	font-size: 12px;
+}
+
 .input-group-addon{
 	border-radius: 0px;
 }
 
 .larger-box {
 	background-color: #f2f2f2;
-	height: 400px;
+	height: 430px;
 }
 .larger-box-nav{
 	background-color: #f2f2f2;
@@ -108,7 +114,7 @@ p {
 	background-color: #ff6c6c;
 }
 .small-line-break {
-	line-height: 5px;
+	line-height: 0px;
 }
 .textarea {
 	border-radius: 4px;
