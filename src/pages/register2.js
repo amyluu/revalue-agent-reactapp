@@ -7,7 +7,7 @@ import axios from 'axios'
 
 class Register2 extends Component {
 		AxiosGet() {
-			axios.get('http://54.149.159.111/register')
+			axios.get('http://54.149.159.111/create/user')
 			.then(function (results) {
 			console.log(results.data);
 			})
@@ -60,7 +60,7 @@ class Register2 extends Component {
 
 		if (!validator.isNumeric(state.phoneNumber.value)) {
 		  state.phoneNumber.isValid = false;
-		  state.phoneNumber.message = 'Use only numbers, no spaces or hyphens.';
+		  state.phoneNumber.message = 'Use only numbers, no spaces or hyphens';
 
 		  this.setState(state);
 		  return false;
@@ -68,7 +68,7 @@ class Register2 extends Component {
 
 		if (!validator.isURL(state.domainName.value)) {
 		  state.domainName.isValid = false;
-		  state.domainName.message = 'Invalid website URL.';
+		  state.domainName.message = 'Invalid website URL';
 
 		  this.setState(state);
 		  return false;

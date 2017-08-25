@@ -7,7 +7,7 @@ import axios from 'axios'
 
 class Login extends Component {
 		AxiosGet() {
-			axios.get('http://54.149.159.111/login')
+			axios.post('http://54.149.159.111/login')
 			.then(function (results) {
 			console.log(results.data);
 			})

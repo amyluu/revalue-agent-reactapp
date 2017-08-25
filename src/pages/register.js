@@ -5,9 +5,10 @@ import validator from 'validator'
 import history from '../history.js'
 
 class Register extends Component {
-	  constructor() {
+	   constructor() {
 		super()
-		this.handleClick = this.handleClick.bind(this)
+		this.handleClick = this.handleClick.bind(this) //Click for onSubmit button
+		this.handleClickBack = this.handleClickBack.bind(this) //Click for Previous Page button
 		this.state = {
 		  email: {value: '', isValid: true, message: ''},
 		  password: {value: '', isValid: true, message: ''},
@@ -15,65 +16,74 @@ class Register extends Component {
 		};
 	  }
 
-	  handleClick(e) {
+	  	componentDidMount(){
+			this.props.history.goBack()
+		}
+
+	   handleClick(e) {
 		  //e.preventDefault()
 		  this.props.history.push('/register2')
 		}
 
-	  onChange = (e) => {
-		let state = this.state;
-		state[e.target.name].value = e.target.value;
+		handleClickBack(e) {
+			e.preventDefault()
+			this.props.history.goBack()
+		}
 
-		this.setState(state);
-	  }
+	   onChange = (e) => {
+			let state = this.state;
+			state[e.target.name].value = e.target.value;
 
-	  onSubmit = (e) => {
-		e.preventDefault();
-		this.resetValidationStates(); //reset states before the validation procedure is run.
-		if (this.formIsValid()) { //run the validation, and if it's good move on.
-		  //form processing here....
-			this.handleClick()
+			this.setState(state);
+	   }
+
+	   onSubmit = (e) => {
+			e.preventDefault();
+			this.resetValidationStates(); //reset states before the validation procedure is run.
+			if (this.formIsValid()) { //run the validation, and if it's good move on.
+			  //form processing here....
+				this.handleClick()
+				}
+	   }
+
+	   formIsValid = () => {
+			let state = this.state;
+
+			if (!validator.isEmail(state.email.value)) {
+			  state.email.isValid = false;
+			  state.email.message = 'Not a valid email address';
+
+			  this.setState(state);
+			  return false;
 			}
-	  }
 
-	  formIsValid = () => {
-		let state = this.state;
+			if (state.password.value !== state.confirmPassword.value) {
+				state.password.isValid = false
+				state.confirmPassword.isValid = false
+				state.confirmPassword.message = 'Passwords do not match'
 
-		if (!validator.isEmail(state.email.value)) {
-		  state.email.isValid = false;
-		  state.email.message = 'Not a valid email address';
+				this.setState(state)
+				return false
+			}
 
-		  this.setState(state);
-		  return false;
-		}
+			//additional validation checks here
 
-		if (state.password.value !== state.confirmPassword.value) {
-			state.password.isValid = false
-			state.confirmPassword.isValid = false
-			state.confirmPassword.message = 'Passwords do not match'
-
-			this.setState(state)
-			return false
-		}
-
-		//additional validation checks here
-
-		return true;
-	  }
+			return true;
+		  }
 
 		resetValidationStates = () => {
 			let state = this.state;
 
 			Object.keys(state).map(key => {
-          if (state[key].hasOwnProperty('isValid')) {
-            state[key].isValid = true;
-            state[key].message = '';
-          }
-        })
-        return this.setState(state);
-      }
+		  if (state[key].hasOwnProperty('isValid')) {
+			state[key].isValid = true;
+			state[key].message = '';
+		  }
+		})
+		return this.setState(state);
+	  }
 
-	  render() {
+	   render() {
 		let {email, password, confirmPassword} = this.state;
 		/*
 		Each of the group classes below will include the 'form-group' class, and will only
@@ -86,7 +96,7 @@ class Register extends Component {
 		return (
 		<div className="Login">
 		   <div className="row">
-		   	<div className="col-sm-8 col-centered">
+			<div className="col-sm-8 col-centered">
 					<form  onSubmit={this.onSubmit}>
 
 						<div className={emailGroupClass}>
@@ -99,7 +109,7 @@ class Register extends Component {
 						</div>
 
 					  <div className={passwordGroupClass}>
-					  	<div className="input-group">
+						<div className="input-group">
 								<span className="input-group-addon"><i className="fa fa-unlock-alt" /></span>	
 								<input type="password" name="password" className="form-control"
 							  placeholder="Password" value={password.value} onChange={this.onChange} 
@@ -117,8 +127,8 @@ class Register extends Component {
 							</div>
 						<span className="help-block">{confirmPassword.message}</span>
 					  </div>
-					  	<button  className="btn btn-block btn-login" type="submit">
-					  	Continue Registration</button>
+						<button className="btn btn-block btn-login" type="submit">
+						Continue Registration</button>
 					</form>
 				</div>
 			</div>
@@ -133,7 +143,7 @@ class Register extends Component {
 						</Link>
 					</div>
 					<div className="btn-group" role="group">
-						<button onClick={history.goBack} type="button" className="btn" id="btn-right">
+						<button onClick={this.handleClickBack} type="button" className="btn" id="btn-right">
 							<i className="fa fa-arrow-left fa-fw" /> Previous Page
 						</button>
 					</div>
