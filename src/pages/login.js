@@ -6,11 +6,35 @@ import history from '../history.js'
 import axios from 'axios'
 
 class Login extends Component {
-		AxiosGet() {
-			axios.post('http://54.149.159.111/login')
-			.then(function (results) {
-			console.log(results.data);
+		AxiosPost() {
+		    var myurl4 = "http://54.149.159.111/login";
+		     var myReq4 = new XMLHttpRequest();
+		     myReq4.onreadystatechange = function() {
+		      if(myReq4.readyState === 4 && myReq4.status === 200) {
+		          if (myReq4.withCredentials === true ) {
+		          console.log(JSON.parse(myReq4.response));
+		          } else {
+		          console.log("doesnt work");
+		          }
+		      };
+		     }
+		     myReq4.open('POST', myurl4, true);
+		     myReq4.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); 
+		     myReq4.withCredentials = true;
+		     myReq4.send(JSON.stringify({"email":this.state.email.value, "password":this.state.password.value}));
+		}
+
+		AxiosPost2() {
+			axios.post('http://54.149.159.111/login', {
+				email: this.state.email.value,
+				password: this.state.password.value
 			})
+			.then(results => {
+				console.log(results.data);
+			})
+			.catch(error => {
+    			console.log(error);
+ 			})
 		}
 
 	  constructor() {
@@ -29,24 +53,25 @@ class Login extends Component {
 	  }
 
 	  onSubmit = (e) => {
+	  	debugger
 		e.preventDefault();
 		this.resetValidationStates(); //reset states before the validation procedure is run.
 		if (this.formIsValid()) { //run the validation, and if it's good move on.
 		  //form processing here....
-			this.AxiosGet()
+			this.AxiosPost2()
 			}
 	  }
 
 	  formIsValid = () => {
 		let state = this.state;
 
-		if (!validator.isEmail(state.email.value)) {
-		  state.email.isValid = false;
-		  state.email.message = 'Invalid email address';
-
-		  this.setState(state);
-		  return false;
-		}
+		{/*if (!validator.isEmail(state.email.value)) {
+				  state.email.isValid = false;
+				  state.email.message = 'Invalid email address';
+		
+				  this.setState(state);
+				  return false;
+				}*/}
 
 		//additional validation checks here
 
@@ -54,10 +79,10 @@ class Login extends Component {
 	  }
 
 		resetValidationStates = () => {
-			let state = this.state;
-
+			let state = this.state
+			// eslint-disable-next-line
 			Object.keys(state).map(key => {
-          if (state[key].hasOwnProperty('isValid')) {
+        	if (state[key].hasOwnProperty('isValid')) {
             state[key].isValid = true;
             state[key].message = '';
           }
@@ -100,6 +125,7 @@ class Login extends Component {
 							<span className="help-block">{password.message}</span>
 					  </div>
 					  	<button  className="btn btn-block btn-login" type="submit">LOGIN</button>
+					  	
 					</form>
 				</div>
 			</div>
@@ -111,7 +137,7 @@ class Login extends Component {
 							<button 
 								onClick={() => history.push('/forgotpassword')} 
 								type="button" className="btn" id="btn-left">
-									<i className="fa fa-question" /> 
+									<i className="fa fa-question fa-fw" /> 
 									Forgot Password
 							</button>
 						</Link>
@@ -120,7 +146,7 @@ class Login extends Component {
 						<Link to="/register">
 							<button onClick={() => history.push('/register')} 
 								type="button" className="btn" id="btn-right">
-								<i className="fa fa-pencil" /> 
+								<i className="fa fa-pencil fa-fw" /> 
 								Register
 							</button>
 						</Link>

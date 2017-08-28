@@ -5,16 +5,34 @@ import validator from 'validator'
 import history from '../history.js'
 import axios from 'axios'
 
-class Register2 extends Component {
-		AxiosGet() {
-			axios.get('http://54.149.159.111/create/user')
-			.then(function (results) {
-			console.log(results.data);
-			})
+class Register2 extends Component.Register {
+		CreateUserPostNext() {
+		var myurl12 = "http://54.149.159.111/create/user/next";
+		var myReq12 = new XMLHttpRequest();
+		myReq12.onreadystatechange = function() {
+			if(myReq12.readyState === 4 && myReq12.status === 200) {
+					if (myReq12.withCredentials === true ) {
+					console.log(JSON.parse(myReq12.response));
+					} else {
+					console.log("doesnt work");
+					}
+			};
+		}
+		myReq12.open('POST', myurl12, true);
+		myReq12.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); 
+		myReq12.withCredentials = true;
+		myReq12.send(
+			JSON.stringify({
+				"email":this.state.email.value,
+				"firstname":this.state.firstName.value,
+				"lastname":this.state.lastName.value,
+				"phone":this.state.phoneNumber.value,
+				"domain":this.state.domainName.value
+			}));
 		}
 
-	  constructor() {
-		super()
+	  constructor(props) {
+		super(props)
 		this.state = {
 			firstName: {value: '', isValid: true, message: ''},
 			lastName: {value: '', isValid: true, message: ''},
@@ -32,10 +50,10 @@ class Register2 extends Component {
 
 	  onSubmit = (e) => {
 		e.preventDefault();
-		this.resetValidationStates(); //reset states before the validation procedure is run.
+		//this.resetValidationStates(); //reset states before the validation procedure is run.
 		if (this.formIsValid()) { //run the validation, and if it's good move on.
 		  //form processing here....
-			this.AxiosGet()
+			this.CreateUserPostNext()
 			}
 	  }
 
@@ -81,15 +99,15 @@ class Register2 extends Component {
 
 		resetValidationStates = () => {
 			let state = this.state;
-
+			// eslint-disable-next-line
 			Object.keys(state).map(key => {
-          if (state[key].hasOwnProperty('isValid')) {
-            state[key].isValid = true;
-            state[key].message = '';
-          }
-        })
-        return this.setState(state);
-      }
+		  if (state[key].hasOwnProperty('isValid')) {
+			state[key].isValid = true;
+			state[key].message = '';
+		  }
+		})
+		return this.setState(state);
+	  }
 
 	  render() {
 		let {firstName, lastName, phoneNumber, domainName} = this.state;
@@ -105,7 +123,7 @@ class Register2 extends Component {
 		return (
 		<div className="Register2">
 		   <div className="row">
-		   	<div className="col-sm-8 col-centered">
+			<div className="col-sm-8 col-centered">
 					<form  onSubmit={this.onSubmit}>
 
 						<div className={firstNameGroupClass}>
@@ -152,7 +170,7 @@ class Register2 extends Component {
 						  <span className="help-block">{domainName.message}</span>
 						</div>
 
-					  	<button  className="btn btn-block btn-login" type="submit">Register</button>
+						<button  className="btn btn-block btn-login" type="submit">Register</button>
 					</form>
 				</div>
 			</div>
@@ -179,7 +197,7 @@ class Register2 extends Component {
 						</Link>
 					</div>
 				</div>
-	  	</div>
+		</div>
 
 		</div>
 		);

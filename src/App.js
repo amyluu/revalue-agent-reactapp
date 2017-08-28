@@ -4,12 +4,12 @@ import './App.css'
 import { BrowserRouter, Route} from 'react-router-dom'
 import history from './history.js'
 
-import Login from './pages/login.js'
-import ForgotPassword from './pages/forgotpassword.js'
-import Register from './pages/register.js'
-import Register2 from './pages/register2.js'
-import Axios from './pages/axios.js'
-import Test from './pages/test.js'
+import Login from './pages/login'
+import ForgotPassword from './pages/forgotpassword'
+import Register from './pages/register'
+import Register2 from './pages/register2'
+import Test from './pages/test'
+import PwRecovery from './pages/pwrecovery'
 
 class App extends React.Component{
   componentDidMount() {
@@ -35,7 +35,7 @@ class App extends React.Component{
                     <Route path="/forgotpassword" component={ForgotPassword} />
                     <Route path="/register" component={Register} />
                     <Route path="/register2" component={Register2} />
-                    <Route path="/axios" component={Axios} />
+                    <Route path="/pwrecovery" component={PwRecovery} />
                     <Route path="/test" component={Test} />
                   </div>
                 </div>
