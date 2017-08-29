@@ -3,9 +3,29 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import validator from 'validator'
 import history from '../history.js'
-import axios from 'axios'
+//import axios from 'axios'
 
-class Register2 extends Component.Register {
+class Register extends Component {
+	constructor(props) {
+	   super(props)
+	   this.state = {
+	   	email: {this.state.email.value}
+	   	//saveEmail: {value: this.state.email.value}
+	   }
+	}
+}
+
+class Register2 extends Register {
+		constructor(props) {
+			super(props)
+			this.state = {
+				firstName: {value: '', isValid: true, message: ''},
+				lastName: {value: '', isValid: true, message: ''},
+				phoneNumber: {value: '', isValid: true, message: ''},
+				domainName: {value: '', isValid: true, message: ''},
+			};
+	  	}
+
 		CreateUserPostNext() {
 		var myurl12 = "http://54.149.159.111/create/user/next";
 		var myReq12 = new XMLHttpRequest();
@@ -23,23 +43,13 @@ class Register2 extends Component.Register {
 		myReq12.withCredentials = true;
 		myReq12.send(
 			JSON.stringify({
-				"email":this.state.email.value,
-				"firstname":this.state.firstName.value,
-				"lastname":this.state.lastName.value,
-				"phone":this.state.phoneNumber.value,
-				"domain":this.state.domainName.value
+				"email": this.state.email.value,
+				"firstname": this.state.firstName.value,
+				"lastname": this.state.lastName.value,
+				"phone": this.state.phoneNumber.value,
+				"domain": this.state.domainName.value
 			}));
 		}
-
-	  constructor(props) {
-		super(props)
-		this.state = {
-			firstName: {value: '', isValid: true, message: ''},
-			lastName: {value: '', isValid: true, message: ''},
-			phoneNumber: {value: '', isValid: true, message: ''},
-			domainName: {value: '', isValid: true, message: ''},
-		};
-	  }
 
 	  onChange = (e) => {
 		let state = this.state;

@@ -28,16 +28,17 @@ class Register extends Component {
 			);
 		}
 
-	   constructor(props) {
-		super(props)
-		this.handleClick = this.handleClick.bind(this) //Click for onSubmit button
-		this.handleClickBack = this.handleClickBack.bind(this) //Click for Previous Page button
-		this.state = {
-		  email: {value: '', isValid: true, message: ''},
-		  password: {value: '', isValid: true, message: ''},
-		  confirmPassword: {value: '', isValid: true, message: ''}
-		};
-	  }
+	   	constructor(props) {
+			super(props)
+			this.handleClick = this.handleClick.bind(this) //Click for onSubmit button
+			this.handleClickBack = this.handleClickBack.bind(this) //Click for Previous Page button
+			this.state = {
+			  email: {value: '', isValid: true, message: ''},
+			  password: {value: '', isValid: true, message: ''},
+			  confirmPassword: {value: '', isValid: true, message: ''}, 
+			  saveEmail: {value: ''}
+			};
+	  	}
 
 	  	componentDidMount(){
 			this.props.history.goBack()
@@ -66,7 +67,6 @@ class Register extends Component {
 			if (this.formIsValid()) { //run the validation, and if it's good move on.
 			  //form processing here...
 				this.CreateUserPost()
-				let saveEmail = this.state.email.value
 				this.handleClick()
 				}
 	   }
@@ -78,6 +78,7 @@ class Register extends Component {
 			  state.email.isValid = false;
 			  state.email.message = 'Not a valid email address';
 
+			  state.saveEmail.value = state.email.value
 			  this.setState(state);
 			  return false;
 			}
