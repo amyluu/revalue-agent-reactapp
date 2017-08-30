@@ -2,9 +2,21 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import validator from 'validator'
+import cookies from '../cookies.js'
 import history from '../history.js'
 
 class Register extends Component {
+		constructor(props) {
+			super(props)
+			this.handleClick = this.handleClick.bind(this) //Click for onSubmit button
+			this.handleClickBack = this.handleClickBack.bind(this) //Click for Previous Page button
+			this.state = {
+				email: {value: '', isValid: true, message: ''},
+				password: {value: '', isValid: true, message: ''},
+				confirmPassword: {value: '', isValid: true, message: ''}, 
+			};
+		}
+
 		CreateUserPost() {
 		var myurl2 = "http://54.149.159.111/create/user";
 			var myReq2 = new XMLHttpRequest();
@@ -28,19 +40,7 @@ class Register extends Component {
 			);
 		}
 
-	   	constructor(props) {
-			super(props)
-			this.handleClick = this.handleClick.bind(this) //Click for onSubmit button
-			this.handleClickBack = this.handleClickBack.bind(this) //Click for Previous Page button
-			this.state = {
-			  email: {value: '', isValid: true, message: ''},
-			  password: {value: '', isValid: true, message: ''},
-			  confirmPassword: {value: '', isValid: true, message: ''}, 
-			  saveEmail: {value: ''}
-			};
-	  	}
-
-	  	componentDidMount(){
+		componentDidMount(){
 			this.props.history.goBack()
 		}
 
@@ -62,6 +62,7 @@ class Register extends Component {
 	   }
 
 	   onSubmit = (e) => {
+	   		cookies.set('email', this.state.email.value, {path: '/'})
 			e.preventDefault();
 			this.resetValidationStates(); //reset states before the validation procedure is run.
 			if (this.formIsValid()) { //run the validation, and if it's good move on.
@@ -78,7 +79,6 @@ class Register extends Component {
 			  state.email.isValid = false;
 			  state.email.message = 'Not a valid email address';
 
-			  state.saveEmail.value = state.email.value
 			  this.setState(state);
 			  return false;
 			}

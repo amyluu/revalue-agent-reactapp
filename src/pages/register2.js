@@ -2,18 +2,9 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import validator from 'validator'
+import Cookies from 'universal-cookie'
 import history from '../history.js'
-//import axios from 'axios'
-
-class Register extends Component {
-	constructor(props) {
-	   super(props)
-	   this.state = {
-	   	email: {this.state.email.value}
-	   	//saveEmail: {value: this.state.email.value}
-	   }
-	}
-}
+import Register from './register.js'
 
 class Register2 extends Register {
 		constructor(props) {
@@ -43,7 +34,7 @@ class Register2 extends Register {
 		myReq12.withCredentials = true;
 		myReq12.send(
 			JSON.stringify({
-				"email": this.state.email.value,
+				"email": this.setCookies.cookies.get('email'),
 				"firstname": this.state.firstName.value,
 				"lastname": this.state.lastName.value,
 				"phone": this.state.phoneNumber.value,
