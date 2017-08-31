@@ -2,8 +2,7 @@
 https://github.com/facebookincubator/create-react-app
 
 ```
-<!-- npm install -g create-react-app -->
-npm install --save create-create-app
+npm install -g create-react-app
 ```
 
 ### Dependencies 
