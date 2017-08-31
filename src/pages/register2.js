@@ -2,13 +2,17 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import validator from 'validator'
+import Cookies from 'universal-cookie'
 import history from '../history.js'
 import Register from './register.js'
 
 class Register2 extends Component {
 		constructor(props) {
 			super(props)
+			this.getEmail = this.getEmail.bind(this)
 			this.state = {
+				//email: {value: }
+				//email: {value: '', isValid: true, message: ''},
 				firstName: {value: '', isValid: true, message: ''},
 				lastName: {value: '', isValid: true, message: ''},
 				phoneNumber: {value: '', isValid: true, message: ''},
@@ -33,12 +37,21 @@ class Register2 extends Component {
 		myReq12.withCredentials = true;
 		myReq12.send(
 			JSON.stringify({
-				"email": this.state.email.value,
+				//"email": this.state.email.value,
+				"email": this.getEmail(),
+				//"email": this.state.email.value,
 				"firstname": this.state.firstName.value,
 				"lastname": this.state.lastName.value,
 				"phone": this.state.phoneNumber.value,
 				"domain": this.state.domainName.value
 			}));
+		}
+
+		getEmail() {
+			const cookies = new Cookies()
+			cookies.get('email')
+			console.log(cookies.get('email'))
+			//console.log(document.cookie)
 		}
 
 	  onChange = (e) => {
@@ -59,6 +72,8 @@ class Register2 extends Component {
 
 	  formIsValid = () => {
 		let state = this.state;
+
+
 
 		if (!validator.isAlpha(state.firstName.value)) {
 		  state.firstName.isValid = false;

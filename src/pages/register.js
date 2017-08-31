@@ -65,7 +65,7 @@ class Register extends Component {
 			e.preventDefault();
 			const cookies = new Cookies()
 				cookies.set('email', this.state.email.value, {path: '/'})
-				console.log(cookies.get('email'))
+				//console.log(cookies.getAll())
 			this.resetValidationStates(); //reset states before the validation procedure is run.
 			if (this.formIsValid()) { //run the validation, and if it's good move on.
 			  //form processing here...
