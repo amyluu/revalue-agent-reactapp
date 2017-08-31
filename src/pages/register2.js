@@ -9,10 +9,13 @@ import Register from './register.js'
 class Register2 extends Component {
 		constructor(props) {
 			super(props)
-			this.getEmail = this.getEmail.bind(this)
+			// this.getEmail = this.getEmail.bind(this)
+			// Getting Email from cookies
+			const cookies = new Cookies()
+			var mymail = cookies.get('email')
+			console.log(mymail)
 			this.state = {
-				//email: {value: }
-				//email: {value: '', isValid: true, message: ''},
+				email: {value: mymail},
 				firstName: {value: '', isValid: true, message: ''},
 				lastName: {value: '', isValid: true, message: ''},
 				phoneNumber: {value: '', isValid: true, message: ''},
@@ -21,7 +24,8 @@ class Register2 extends Component {
 	  	}
 
 		CreateUserPostNext() {
-		var myurl12 = "http://54.149.159.111/create/user/next";
+		// var myurl12 = "http://54.149.159.111/create/user/next";
+		var myurl12 = "http://localhost:5000/create/user/next";
 		var myReq12 = new XMLHttpRequest();
 		myReq12.onreadystatechange = function() {
 			if(myReq12.readyState === 4 && myReq12.status === 200) {
@@ -37,9 +41,7 @@ class Register2 extends Component {
 		myReq12.withCredentials = true;
 		myReq12.send(
 			JSON.stringify({
-				//"email": this.state.email.value,
-				"email": this.getEmail(),
-				//"email": this.state.email.value,
+				"email": this.state.email.value,
 				"firstname": this.state.firstName.value,
 				"lastname": this.state.lastName.value,
 				"phone": this.state.phoneNumber.value,
@@ -47,12 +49,12 @@ class Register2 extends Component {
 			}));
 		}
 
-		getEmail() {
-			const cookies = new Cookies()
-			cookies.get('email')
-			console.log(cookies.get('email'))
-			//console.log(document.cookie)
-		}
+		// getEmail() {
+		// 	const cookies = new Cookies()
+		// 	cookies.get('email')
+		// 	console.log(cookies.get('email'))
+		// 	console.log(document.cookie)
+		// }
 
 	  onChange = (e) => {
 		let state = this.state;

@@ -8,7 +8,7 @@ import Login from './pages/login'
 import ForgotPassword from './pages/forgotpassword'
 import Register from './pages/register'
 import Register2 from './pages/register2'
-import Test from './pages/test'
+// import Test from './pages/test'
 import PwRecovery from './pages/pwrecovery'
 
 class App extends React.Component{
@@ -36,7 +36,7 @@ class App extends React.Component{
                     <Route path="/register" component={Register} />
                     <Route path="/register2" component={Register2} />
                     <Route path="/pwrecovery" component={PwRecovery} />
-                    <Route path="/test" component={Test} />
+                    {/* <Route path="/test" component={Test} /> */}
                   </div>
                 </div>
 
