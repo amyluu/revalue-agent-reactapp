@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import validator from 'validator'
-import cookies from '../cookies.js'
+import Cookies from 'universal-cookie'
 import history from '../history.js'
 
 class Register extends Component {
@@ -62,8 +62,10 @@ class Register extends Component {
 	   }
 
 	   onSubmit = (e) => {
-	   		cookies.set('email', this.state.email.value, {path: '/'})
 			e.preventDefault();
+			const cookies = new Cookies()
+				cookies.set('email', this.state.email.value, {path: '/'})
+				console.log(cookies.get('email'))
 			this.resetValidationStates(); //reset states before the validation procedure is run.
 			if (this.formIsValid()) { //run the validation, and if it's good move on.
 			  //form processing here...
