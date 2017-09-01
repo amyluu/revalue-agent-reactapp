@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import validator from 'validator'
 import history from '../history.js'
-import axios from 'axios'
+//import axios from 'axios'
 
 class Login extends Component {
-		AxiosPost() {
+		LoginPost() {
 		    var myurl4 = "http://54.149.159.111/login";
 		     var myReq4 = new XMLHttpRequest();
 		     myReq4.onreadystatechange = function() {
@@ -21,21 +21,24 @@ class Login extends Component {
 		     myReq4.open('POST', myurl4, true);
 		     myReq4.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); 
 		     myReq4.withCredentials = true;
-		     myReq4.send(JSON.stringify({"email":this.state.email.value, "password":this.state.password.value}));
+		     myReq4.send(JSON.stringify({
+		     	"email":this.state.email.value, 
+		     	"password":this.state.password.value
+		     }));
 		}
 
-		AxiosPost2() {
-			axios.post('http://54.149.159.111/login', {
-				email: this.state.email.value,
-				password: this.state.password.value
-			})
-			.then(results => {
-				console.log(results.data);
-			})
-			.catch(error => {
-    			console.log(error);
- 			})
-		}
+		/*AxiosPost2() {
+					axios.post('http://54.149.159.111/login', {
+						email: this.state.email.value,
+						password: this.state.password.value
+					})
+					.then(results => {
+						console.log(results.data);
+					})
+					.catch(error => {
+		    			console.log(error);
+		 			})
+				}*/
 
 	  constructor() {
 		super()
@@ -58,20 +61,20 @@ class Login extends Component {
 		this.resetValidationStates(); //reset states before the validation procedure is run.
 		if (this.formIsValid()) { //run the validation, and if it's good move on.
 		  //form processing here....
-			this.AxiosPost2()
+			this.LoginPost()
 			}
 	  }
 
 	  formIsValid = () => {
 		let state = this.state;
 
-		{/*if (!validator.isEmail(state.email.value)) {
+		if (!validator.isEmail(state.email.value)) {
 				  state.email.isValid = false;
 				  state.email.message = 'Invalid email address';
 		
 				  this.setState(state);
 				  return false;
-				}*/}
+				}
 
 		//additional validation checks here
 
