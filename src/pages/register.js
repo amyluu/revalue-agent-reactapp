@@ -18,8 +18,8 @@ class Register extends Component {
 		}
 
 		CreateUserPost() {
-		// var myurl2 = "http://54.149.159.111/create/user";
-		var myurl2 = "http://localhost:5000/create/user";
+		var myurl2 = "http://54.149.159.111/create/user";
+		//var myurl2 = "http://localhost:5000/create/user";
 			var myReq2 = new XMLHttpRequest();
 			myReq2.onreadystatechange = function() {
 				if(myReq2.readyState === 4 && myReq2.status === 200) {

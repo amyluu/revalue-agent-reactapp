@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import validator from 'validator'
 import Cookies from 'universal-cookie'
 import history from '../history.js'
-import Register from './register.js'
 
 class Register2 extends Component {
 		constructor(props) {
@@ -14,6 +13,7 @@ class Register2 extends Component {
 			const cookies = new Cookies()
 			var mymail = cookies.get('email')
 			console.log(mymail)
+			this.handleClick = this.handleClick.bind(this)
 			this.state = {
 				email: {value: mymail},
 				firstName: {value: '', isValid: true, message: ''},
@@ -24,8 +24,8 @@ class Register2 extends Component {
 	  	}
 
 		CreateUserPostNext() {
-		// var myurl12 = "http://54.149.159.111/create/user/next";
-		var myurl12 = "http://localhost:5000/create/user/next";
+		var myurl12 = "http://54.149.159.111/create/user/next";
+		//var myurl12 = "http://localhost:5000/create/user/next";
 		var myReq12 = new XMLHttpRequest();
 		myReq12.onreadystatechange = function() {
 			if(myReq12.readyState === 4 && myReq12.status === 200) {
@@ -63,19 +63,22 @@ class Register2 extends Component {
 		this.setState(state);
 	  }
 
+	  handleClick(e) {
+	  	this.props.history.push('/tyregister')
+	  }
+
 	  onSubmit = (e) => {
 		e.preventDefault();
 		//this.resetValidationStates(); //reset states before the validation procedure is run.
 		if (this.formIsValid()) { //run the validation, and if it's good move on.
 		  //form processing here....
 			this.CreateUserPostNext()
+			this.handleClick()
 			}
 	  }
 
 	  formIsValid = () => {
 		let state = this.state;
-
-
 
 		if (!validator.isAlpha(state.firstName.value)) {
 		  state.firstName.isValid = false;

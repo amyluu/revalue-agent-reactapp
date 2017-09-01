@@ -10,6 +10,7 @@ import Register from './pages/register'
 import Register2 from './pages/register2'
 // import Test from './pages/test'
 import PwRecovery from './pages/pwrecovery'
+import ThanksRegister from './pages/tyregister'
 
 class App extends React.Component{
   componentDidMount() {
@@ -36,6 +37,7 @@ class App extends React.Component{
                     <Route path="/register" component={Register} />
                     <Route path="/register2" component={Register2} />
                     <Route path="/pwrecovery" component={PwRecovery} />
+                    <Route path="/tyregister" component={ThanksRegister} />
                     {/* <Route path="/test" component={Test} /> */}
                   </div>
                 </div>

@@ -124,6 +124,9 @@ p {
 	color: #757575;
 	box-shadow: 0px 1px 1px #888;
 }
+.ThanksRegister {
+	width: 100%;
+}
 .white-logo {
 	background-color: #ff6c6c;
 	width: 90px;
