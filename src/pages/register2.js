@@ -8,11 +8,10 @@ import history from '../history.js'
 class Register2 extends Component {
 		constructor(props) {
 			super(props)
-			// this.getEmail = this.getEmail.bind(this)
 			// Getting Email from cookies
 			const cookies = new Cookies()
 			var mymail = cookies.get('email')
-			console.log(mymail)
+			//console.log(mymail)
 			this.handleClick = this.handleClick.bind(this)
 			this.state = {
 				email: {value: mymail},

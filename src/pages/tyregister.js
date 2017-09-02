@@ -1,12 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import history from '../history.js'
+import { Link, withRouter } from 'react-router-dom'
 
 class ThanksRegister extends React.Component {
-	constructor(props){
-		super(props)
-		this.redirect = this.redirect.bind(this)
-	}
+	//constructor(props){
+	//	super(props)
+	//}
 
 	redirect(e) {
 		this.props.history.push('/')
@@ -16,15 +14,9 @@ class ThanksRegister extends React.Component {
          // Start counting when the page is loaded
          this.timeoutHandle = setTimeout(() => {
          	this.redirect()
-            // Add your logic for the transition
+            // Add logic for transition
          }, 5000)
     }
-
-    componentWillUnmount() {
-         clearTimeout(this.timeoutHandle); 
-         // This is just necessary in the case that the screen is closed before the timeout fires, otherwise it would cause a memory leak that would trigger the transition regardless, breaking the user experience.
-    }
-
 
 	render() {
 		return (
@@ -44,6 +36,11 @@ class ThanksRegister extends React.Component {
 			</div>
 		)
 	}
+
+	componentWillUnmount() {
+         clearTimeout(this.timeoutHandle); 
+         // This is just necessary in the case that the screen is closed before the timeout fires, otherwise it would cause a memory leak that would trigger the transition regardless, breaking the user experience.
+    }
 }
 
-export default ThanksRegister
+export default withRouter(ThanksRegister)
