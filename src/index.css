@@ -8,9 +8,9 @@ p {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-.p-col {
+/*.p-col {
 	margin-left: 35px;
-}
+}*/
 .arrow-down {
 	width: 0;
 	height: 0px;
@@ -18,6 +18,7 @@ p {
 	border-right: 15px solid transparent;
 	border-top: 15px solid #ff6c6c;
 }
+
 .btn-login{
 	background-color: #f0c3c3;
 	padding-top: 10px;
@@ -26,6 +27,11 @@ p {
 }
 .btn-login:hover {
 	background-color: #efb2b2;
+}
+.banner-preview {
+	width: 100%;
+	margin-bottom: -80px;
+	margin-top: -100px;
 }
 #btn-left{
 	background-color: white;
@@ -65,8 +71,14 @@ p {
     float: none;
     margin: 0 auto;
 }
-.container-fluid{
+.container-fluid .AgentLayout{
+	width: 100%;
+}
+.container-fluid .MainLayout{
 	width: 90%;
+}
+.CreateWidget {
+	padding-top: 50px;
 }
 .form-control {
 	border-radius: 0px;
@@ -80,7 +92,7 @@ p {
 }
 .green-icon {
 	vertical-align: middle;
-	margin-right: 5px;
+	/*margin-right: 5px;*/
 }
 
 .help-block {

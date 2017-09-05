@@ -2,27 +2,26 @@ import React from 'react'
 import logoImage from '../white-logo.png'
 
 
-const MainLayout = ({ children }) => (
-	<div className="App">
-		<div className="container-fluid MainLayout">
-			<div className="row">
-				<div className="col-sm-5 col-centered larger-box centered">
+const AgentLayout = ({ children }) => (
+	<div className="AgentLayout">
+		<div className="container-fluid AgentLayout">
+			<div className="row-fluid">
+				{/* <div className="col-sm-5 col-centered larger-box centered">*/}
 					<div className="white-logo-div">
 						<img className="white-logo" alt="ReValue logo" src={logoImage} />
 					</div>
-					<div className="arrow-down col-centered" />
 					<br />
 
 					<div className="App-content">
-						<div className="Login">
+						<div className="AgentDiv">
 							{children}
 						</div>
 					</div>
 
-				</div>
+				{/* </div> */}
 			</div>
 		</div>
 	</div>
 )
 
-export default MainLayout
+export default AgentLayout

@@ -1,10 +1,11 @@
 import React from 'react'
-import logoImage from './white-logo.png'
+//import logoImage from './white-logo.png'
 import './App.css'
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import history from './history.js'
 
 import MainLayout from './layouts/MainLayout'
+import AgentLayout from './layouts/AgentLayout'
 
 import Login from './pages/login'
 import ForgotPassword from './pages/forgotpassword'
@@ -13,6 +14,7 @@ import Register2 from './pages/register2'
 // import Test from './pages/test'
 import PwRecovery from './pages/pwrecovery'
 import ThanksRegister from './pages/tyregister'
+import CreateWidget from './pages/createwidget'
 
 class App extends React.Component{
 	componentDidMount() {
@@ -30,6 +32,7 @@ class App extends React.Component{
 						<Route path="/register2" render={() => <MainLayout><Register2 /></MainLayout>} />
 						<Route path="/pwrecovery" render={() => <MainLayout><PwRecovery /></MainLayout>} />
 						<Route path="/tyregister" render={() => <MainLayout><ThanksRegister /></MainLayout>} />
+						<Route path="/createwidget" render={() => <AgentLayout><CreateWidget /></AgentLayout>} />
 					</Switch>
 				</div>
 			</BrowserRouter>
