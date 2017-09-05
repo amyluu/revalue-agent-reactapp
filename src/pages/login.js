@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 import classNames from 'classnames'
 import validator from 'validator'
 import history from '../history.js'
-//import axios from 'axios'
+import axios from 'axios'
 
 class Login extends Component {
-		LoginPost() {
+		/*LoginPost() {
 		    var myurl4 = "http://54.149.159.111/login";
 		     var myReq4 = new XMLHttpRequest();
 		     myReq4.onreadystatechange = function() {
@@ -21,32 +22,43 @@ class Login extends Component {
 		     myReq4.open('POST', myurl4, true);
 		     myReq4.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); 
 		     myReq4.withCredentials = true;
+		     //this.setState({ myReq4: '' })
 		     myReq4.send(JSON.stringify({
 		     	"email":this.state.email.value, 
 		     	"password":this.state.password.value
 		     }));
-		}
+		}*/
 
-		/*AxiosPost2() {
-					axios.post('http://54.149.159.111/login', {
-						email: this.state.email.value,
-						password: this.state.password.value
-					})
-					.then(results => {
-						console.log(results.data);
-					})
-					.catch(error => {
-		    			console.log(error);
-		 			})
-				}*/
+		AxiosPost2() {
+			axios.post('http://54.149.159.111/login', {
+				email: this.state.email.value,
+				password: this.state.password.value
+			})
+			.then(results => {
+				this.setState({authToken: results.headers.at})
+				//console.log(results.data);
+				//console.log(results.headers.at);
+				//console.log(this.state.authToken)
+			})
+			.catch(error => {
+    			console.log(error);
+ 			})
+		}
 
 	  constructor() {
 		super()
+		this.handleClick = this.handleClick.bind(this)
 		this.state = {
 		  email: {value: '', isValid: true, message: ''},
 		  password: {value: '', isValid: true, message: ''},
+		  authToken: '',
 		};
 	  }
+
+	  handleClick(e) {
+		  e.preventDefault()
+		  this.props.history.push('/createwidget')
+		}
 
 	  onChange = (e) => {
 		let state = this.state;
@@ -56,12 +68,18 @@ class Login extends Component {
 	  }
 
 	  onSubmit = (e) => {
-	  	debugger
+	  	
 		e.preventDefault();
+		const cookies = new Cookies()
+			cookies.set('AT', this.state.authToken, {path: '/'})
+			console.log(cookies.get('AT'))
+		
 		this.resetValidationStates(); //reset states before the validation procedure is run.
 		if (this.formIsValid()) { //run the validation, and if it's good move on.
 		  //form processing here....
-			this.LoginPost()
+			this.AxiosPost2()
+			//this.LoginPost()
+			this.handleClick()
 			}
 	  }
 
@@ -162,4 +180,4 @@ class Login extends Component {
 	  }
 	};
 
-	export default Login
+	export default withRouter(Login)

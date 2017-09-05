@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import classNames from 'classnames'
 import validator from 'validator'
 import Cookies from 'universal-cookie'
@@ -223,4 +223,4 @@ class Register2 extends Component {
 	  }
 	};
 
-	export default Register2
+	export default withRouter(Register2)

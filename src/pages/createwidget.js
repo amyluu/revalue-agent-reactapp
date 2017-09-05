@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { DropdownButton, MenuItem, Button, Modal } from 'react-bootstrap'
 import bannerPreview from '../ModalBannerPreview.png'
+import axios from 'axios'
+import Cookies from 'universal-cookie'
 
 class CreateWidget extends React.Component {
 
@@ -12,9 +14,18 @@ class CreateWidget extends React.Component {
 
 	constructor() {
 		super()
+		const cookies = new Cookies()
+			var authToken = cookies.get('AT')
+			console.log(authToken)
+		this.handleClick = this.handleClick.bind(this)
 		this.open = this.open.bind(this)
     	this.close = this.close.bind(this)
 		this.state = { showModal: false };
+	}
+
+	AxiosGet() {
+		axios.get('http://54.149.159.111/user/widget')
+		
 	}
 
 	close() {
@@ -24,6 +35,26 @@ class CreateWidget extends React.Component {
 	open() {
 		this.setState({ showModal: true });
 	}
+
+	/*WidgetGet() {
+		var myurl5 = "http://54.149.159.111/user/widget";
+		var myReq5 = new XMLHttpRequest();
+		myReq5.onreadystatechange = function() {
+		  if(myReq5.readyState === 4 && myReq5.status === 200) {
+		        console.log(JSON.parse(myReq5.response));
+		  };
+		}
+		myReq5.open('GET', myurl5, true);
+		myReq5.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+		myReq5.withCredentials = true;
+		//btn5.addEventListener('click', function() {
+		  //this.style.display = 'none';
+		myReq5.setRequestHeader("AT", myReq4.getResponseHeader("AT"));
+		myReq5.send();
+		});
+	}*/
+
+
 
 	render() {
 		return(
@@ -115,4 +146,4 @@ class CreateWidget extends React.Component {
 	}
 }
 
-export default CreateWidget
+export default withRouter(CreateWidget)
