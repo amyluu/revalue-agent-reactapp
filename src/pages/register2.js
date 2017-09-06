@@ -57,8 +57,8 @@ class Register2 extends Component {
 		// }
 
 		CreateUserPostNext() {
-			// console.log(this.state.firstName.value);
-			axios.post('http://localhost:5000/create/user/next', {
+			axios.post('http://54.149.159.111/create/user/next', {
+			// axios.post('http://localhost:5000/create/user/next', {
 				email: this.state.email.value,
 				firstname: this.state.firstName.value,
 				lastname: this.state.lastName.value,
