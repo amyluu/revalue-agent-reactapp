@@ -5,8 +5,11 @@ import bannerPreview from '../ModalBannerPreview.png'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 
-class CreateWidget extends React.Component {
+import Preview1 from '../images/preview1.png'
+import Preview2 from '../images/preview2.png'
+import Preview3 from '../images/preview3.png'
 
+class CreateWidget extends React.Component {
 	componentDidMount(){
 		document.body.style.backgroundColor = "white"// Set the style
 		//document.body.className="body-component-a" // Or set the class
@@ -17,15 +20,14 @@ class CreateWidget extends React.Component {
 		const cookies = new Cookies()
 			var authToken = cookies.get('AT')
 			console.log(authToken)
-		this.handleClick = this.handleClick.bind(this)
 		this.open = this.open.bind(this)
     	this.close = this.close.bind(this)
-		this.state = { showModal: false };
-	}
-
-	AxiosGet() {
-		axios.get('http://54.149.159.111/user/widget')
-		
+    	this.handleDropdownSelect = this.handleDropdownSelect.bind(this)
+    	this.dropdownTitle = this.dropdownTitle.bind(this)
+		this.state = { 
+			showModal: false,
+			dropdownWidgetSize: 'widgetSizeSmall'	
+		};
 	}
 
 	close() {
@@ -36,6 +38,38 @@ class CreateWidget extends React.Component {
 		this.setState({ showModal: true });
 	}
 
+	// map eventkey to title
+	dropdownTitle(dropdownWidgetSize) {
+		switch(dropdownWidgetSize) {
+			case 'widgetSizeSmall':
+				return 'Small (250x250)';
+			case 'widgetSizeMedium':
+				return 'Medium (350x350)';
+			case 'widgetSizeLarge':
+				return 'Large (450x450)';
+			default:
+				return 'Small (250x250)';
+		}
+	}
+
+	handleDropdownSelect(eventKey, e) {
+		this.setState({
+			dropdownWidgetSize: eventKey
+		});
+	}
+
+	previewImage(dropdownWidgetSize) {
+		switch(dropdownWidgetSize) {
+			case 'widgetSizeSmall':
+				return Preview1;
+			case 'widgetSizeMedium':
+				return Preview2;
+			case 'widgetSizeLarge':
+				return Preview3;
+			default:
+				return Preview1;
+		}
+	}
 	/*WidgetGet() {
 		var myurl5 = "http://54.149.159.111/user/widget";
 		var myReq5 = new XMLHttpRequest();
@@ -75,9 +109,10 @@ class CreateWidget extends React.Component {
 					</div>
 					<div className="col-md-3">
 						{/*Dropdown menu*/}
-						<DropdownButton bsStyle="Default" title="Small (250x250)" id="dropdown-basic-default">
-							<MenuItem eventKey="1">Medium (350x350)</MenuItem>
-							<MenuItem eventKey="2">Large (450x450)</MenuItem>
+						<DropdownButton onSelect={this.handleDropdownSelect} bsStyle="default" title={this.dropdownTitle(this.state.dropdownWidgetSize)} id="dropdown-basic-default">
+							<MenuItem eventKey="widgetSizeSmall">Small (250x250)</MenuItem>
+							<MenuItem eventKey="widgetSizeMedium">Medium (350x350)</MenuItem>
+							<MenuItem eventKey="widgetSizeLarge">Large (450x450)</MenuItem>
 						</DropdownButton>
 					</div>
 				</div>
@@ -87,7 +122,7 @@ class CreateWidget extends React.Component {
 						<p className="p-col">Widget code</p>
 					</div>
 					<div className="col-sm-10">
-					{/*Widget code*/}
+						{/*Widget code*/}
 						<textarea rows={8} cols={70} className="textarea" defaultValue={"widget code here"} /><br />
 						For more help with implementing the code, please see our Code Implementation Guide.<br />
 						Widget may take up to two hours to appear on site.
@@ -99,45 +134,25 @@ class CreateWidget extends React.Component {
 						<p className="p-col">Preview</p>
 					</div>
 					<div className="col-sm-10">
-						<p>Widget preview here</p>
-						<p><a href="#">See example of placement.</a></p>
+						<img src={this.previewImage(this.state.dropdownWidgetSize)}/>
 
-						<Button bsStyle="Default" onClick={this.open}>Launch demo modal</Button>
+						<Button bsStyle="default" onClick={this.open}>See example of placement</Button>
 
 						<Modal show={this.state.showModal} onHide={this.close}>
 							<Modal.Header closeButton>
 								<Modal.Title>Modal heading</Modal.Title>
 	         			</Modal.Header>
 							<Modal.Body>
-								<img className="banner-preview" alt="Banner preview" src={bannerPreview} />
+								<img 
+									className="banner-preview" 
+									alt="Banner preview" 
+									src={this.previewImage(this.state.dropdownWidgetSize)} 
+								/>
 							</Modal.Body>
 							<Modal.Footer>
 								Banner preview
 							</Modal.Footer>
 						</Modal>
-
-						{/* Trigger the modal with a button 
-						<button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
-						Open Modal</button>
-						{/* Modal 
-						<div id="myModal" className="modal fade" role="dialog">
-							<div className="modal-dialog">
-								{/* Modal content
-								<div className="modal-content">
-									<div className="modal-header">
-										<button type="button" className="close" data-dismiss="modal">
-										<span className="fa fa-times-circle-o fa-fw" />
-										</button>
-									</div>
-									<div className="modal-body">
-										<p>Some text in the modal.</p>
-									</div>
-									<div className="modal-footer">
-										<p>SMALL BANNER PREVIEW</p>
-									</div>
-								</div>
-							</div>
-						</div>*/}
 					</div>
 				</div>
 
