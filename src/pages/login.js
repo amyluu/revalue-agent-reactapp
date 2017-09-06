@@ -56,7 +56,6 @@ class Login extends Component {
 	  }
 
 	  handleClick(e) {
-		  e.preventDefault()
 		  this.props.history.push('/createwidget')
 		}
 
