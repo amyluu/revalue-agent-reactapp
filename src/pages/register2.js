@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import validator from 'validator'
 import Cookies from 'universal-cookie'
 import history from '../history.js'
+import axios from 'axios'
 
 class Register2 extends Component {
 		constructor(props) {
@@ -22,31 +23,31 @@ class Register2 extends Component {
 			};
 	  	}
 
-		CreateUserPostNext() {
-		var myurl12 = "http://54.149.159.111/create/user/next";
-		//var myurl12 = "http://localhost:5000/create/user/next";
-		var myReq12 = new XMLHttpRequest();
-		myReq12.onreadystatechange = function() {
-			if(myReq12.readyState === 4 && myReq12.status === 200) {
-					if (myReq12.withCredentials === true ) {
-					console.log(JSON.parse(myReq12.response));
-					} else {
-					console.log("doesnt work");
-					}
-			};
-		}
-		myReq12.open('POST', myurl12, true);
-		myReq12.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); 
-		myReq12.withCredentials = true;
-		myReq12.send(
-			JSON.stringify({
-				"email": this.state.email.value,
-				"firstname": this.state.firstName.value,
-				"lastname": this.state.lastName.value,
-				"phone": this.state.phoneNumber.value,
-				"domain": this.state.domainName.value
-			}));
-		}
+		// CreateUserPostNext() {
+		// // var myurl12 = "http://54.149.159.111/create/user/next";
+		// var myurl12 = "http://localhost:5000/create/user/next";
+		// var myReq12 = new XMLHttpRequest();
+		// myReq12.onreadystatechange = function() {
+		// 	if(myReq12.readyState === 4 && myReq12.status === 200) {
+		// 			if (myReq12.withCredentials === true ) {
+		// 			console.log(JSON.parse(myReq12.response));
+		// 			} else {
+		// 			console.log("doesnt work");
+		// 			}
+		// 	};
+		// }
+		// myReq12.open('POST', myurl12, true);
+		// myReq12.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); 
+		// myReq12.withCredentials = true;
+		// myReq12.send(
+		// 	JSON.stringify({
+		// 		"email": this.state.email.value,
+		// 		"firstname": this.state.firstName.value,
+		// 		"lastname": this.state.lastName.value,
+		// 		"phone": this.state.phoneNumber.value,
+		// 		"domain": this.state.domainName.value
+		// 	}));
+		// }
 
 		// getEmail() {
 		// 	const cookies = new Cookies()
@@ -54,6 +55,23 @@ class Register2 extends Component {
 		// 	console.log(cookies.get('email'))
 		// 	console.log(document.cookie)
 		// }
+
+		CreateUserPostNext() {
+			// console.log(this.state.firstName.value);
+			axios.post('http://localhost:5000/create/user/next', {
+				email: this.state.email.value,
+				firstname: this.state.firstName.value,
+				lastname: this.state.lastName.value,
+				phone: this.state.phoneNumber.value,
+				domain: this.state.domainName.value
+			})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+		}
 
 	  onChange = (e) => {
 		let state = this.state;
