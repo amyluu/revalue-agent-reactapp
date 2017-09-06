@@ -12,8 +12,8 @@ class Login extends Component {
 			this.handleClick = this.handleClick.bind(this)
 			this.state = {
 				email: {value: '', isValid: true, message: ''},
-				password: {value: '', isValid: true, message: ''},
-				authToken: '',
+				password: {value: '', isValid: true, message: ''}
+				// authToken: '',
 			};
 	  }
 		/*LoginPost() {
@@ -37,22 +37,18 @@ class Login extends Component {
 		     	"password":this.state.password.value
 		     }));
 		}*/
-		// componentDidMount() {}
+
 		AxiosPost2() {
-			// var self = this;
 			// axios.post('http://54.149.159.111/login', {
 			axios.post('http://localhost:5000/login', {
 				email: this.state.email.value,
 				password: this.state.password.value
-				// email: self.state.email.value,
-				// password: self.state.password.value
 			})
 			.then(function (response) {
 				console.log(response)
-				console.log(response.headers.at)
 				const cookies = new Cookies()
-				// cookies.set('AT', self.state.authToken, {path: '/'})
 				cookies.set('AT', response.headers.at, {path: '/'})
+				// cookies.set('AT', self.state.authToken, {path: '/'})
 				// console.log(cookies.get('AT'))
 				// self.setState({authToken: response.headers.at})
 				// this.setState({authToken: response.headers.at})
@@ -64,10 +60,6 @@ class Login extends Component {
     			console.log(error)
  			})
 		}
-
-		// componentDidMount() {
-
-		// }
 
 	  handleClick(e) {
 		  this.props.history.push('/createwidget')
