@@ -30,8 +30,9 @@ class CreateWidget extends React.Component {
 			myToken: {value: authToken}
 		};
 	}
-
-	WidgetGet() {
+	componentDidMount() {
+	// WidgetGet() {
+	// WidgetGet() 
 		axios.get('http://localhost:5000/user/widget', {
 			headers: {AT: this.state.myToken.value}
 		})
@@ -42,6 +43,7 @@ class CreateWidget extends React.Component {
 			console.log(error)
  		})
 	}
+
 
 
 	close() {
