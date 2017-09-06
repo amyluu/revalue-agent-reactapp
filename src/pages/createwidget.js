@@ -18,17 +18,35 @@ class CreateWidget extends React.Component {
 	constructor() {
 		super()
 		const cookies = new Cookies()
-			var authToken = cookies.get('AT')
-			console.log(authToken)
+		var authToken = cookies.get('AT')
+		console.log(authToken)
 		this.open = this.open.bind(this)
     	this.close = this.close.bind(this)
     	this.handleDropdownSelect = this.handleDropdownSelect.bind(this)
     	this.dropdownTitle = this.dropdownTitle.bind(this)
 		this.state = { 
 			showModal: false,
-			dropdownWidgetSize: 'widgetSizeSmall'	
+			dropdownWidgetSize: 'widgetSizeSmall',
+			myToken: {value: authToken}
 		};
 	}
+	// componentDidMount() {
+	componentWillMount() {
+	// WidgetGet() {
+	// // WidgetGet() 
+		axios.get('http://54.149.159.111/user/widget', {
+		// axios.get('http://localhost:5000/user/widget', {
+			headers: {AT: this.state.myToken.value}
+		})
+		.then(function (response) {
+			console.log(response)
+		})
+		.catch(function (error) {
+			console.log(error)
+ 		})
+	}
+
+
 
 	close() {
 		this.setState({ showModal: false });

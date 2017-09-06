@@ -7,6 +7,15 @@ import history from '../history.js'
 import axios from 'axios'
 
 class Login extends Component {
+	  constructor(props) {
+			super(props)
+			this.handleClick = this.handleClick.bind(this)
+			this.state = {
+				email: {value: '', isValid: true, message: ''},
+				password: {value: '', isValid: true, message: ''}
+				// authToken: '',
+			};
+	  }
 		/*LoginPost() {
 		    var myurl4 = "http://54.149.159.111/login";
 		     var myReq4 = new XMLHttpRequest();
@@ -31,55 +40,51 @@ class Login extends Component {
 
 		AxiosPost2() {
 			axios.post('http://54.149.159.111/login', {
+			// axios.post('http://localhost:5000/login', {
 				email: this.state.email.value,
 				password: this.state.password.value
 			})
-			.then(results => {
-				this.setState({authToken: results.headers.at})
+			.then(function (response) {
+				console.log(response)
+				const cookies = new Cookies()
+				cookies.set('AT', response.headers.at, {path: '/'})
+				// cookies.set('AT', self.state.authToken, {path: '/'})
+				// console.log(cookies.get('AT'))
+				// self.setState({authToken: response.headers.at})
+				// this.setState({authToken: response.headers.at})
 				//console.log(results.data);
 				//console.log(results.headers.at);
 				//console.log(this.state.authToken)
 			})
-			.catch(error => {
-    			console.log(error);
+			.catch(function (error) {
+    			console.log(error)
  			})
 		}
-
-	  constructor() {
-		super()
-		this.handleClick = this.handleClick.bind(this)
-		this.state = {
-		  email: {value: '', isValid: true, message: ''},
-		  password: {value: '', isValid: true, message: ''},
-		  authToken: '',
-		};
-	  }
 
 	  handleClick(e) {
 		  this.props.history.push('/createwidget')
 		}
 
 	  onChange = (e) => {
-		let state = this.state;
-		state[e.target.name].value = e.target.value;
+			let state = this.state;
+			state[e.target.name].value = e.target.value;
 
-		this.setState(state);
+			this.setState(state);
 	  }
 
 	  onSubmit = (e) => {
-	  	
-		e.preventDefault();
-		const cookies = new Cookies()
-			cookies.set('AT', this.state.authToken, {path: '/'})
-			console.log(cookies.get('AT'))
-		
-		this.resetValidationStates(); //reset states before the validation procedure is run.
-		if (this.formIsValid()) { //run the validation, and if it's good move on.
-		  //form processing here....
-			this.AxiosPost2()
-			//this.LoginPost()
-			this.handleClick()
-			}
+			e.preventDefault();
+			// const cookies = new Cookies()
+			// 	cookies.set('AT', this.state.authToken, {path: '/'})
+			// 	console.log(cookies.get('AT'))
+			
+			this.resetValidationStates(); //reset states before the validation procedure is run.
+			if (this.formIsValid()) { //run the validation, and if it's good move on.
+				//form processing here....
+				this.AxiosPost2()
+				//this.LoginPost()
+				this.handleClick()
+				}
 	  }
 
 	  formIsValid = () => {
