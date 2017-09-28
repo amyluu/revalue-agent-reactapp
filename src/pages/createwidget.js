@@ -27,7 +27,9 @@ class CreateWidget extends React.Component {
 		this.state = { 
 			showModal: false,
 			dropdownWidgetSize: 'widgetSizeSmall',
-			myToken: {value: authToken}
+			myToken: {value: authToken},
+			myArray: {},
+			myWidget: {}
 		};
 	}
 	// componentDidMount() {
@@ -38,14 +40,24 @@ class CreateWidget extends React.Component {
 		axios.get('http://localhost:5000/user/widget', {
 			headers: {AT: this.state.myToken.value}
 		})
-		.then(function (response) {
-			console.log(typeof response)
+		.then(({ data })=> {
+			// console.log(Object.values(data)[0]);
+			this.setState(
+				{ myArray:  Object.values(data)[0]}
+			);
+			this.setState(
+				{ myWidget:  Object.values(this.state.myArray)[0]}
+			);
+			console.log(Object.values(this.state.myArray)[0]);
+			console.log(this.state.myWidget);
 		})
+		// .catch((err)=> {
+			// console.log(error)
+		// })
 		.catch(function (error) {
 			console.log(error)
  		})
 	}
-
 
 
 	close() {
@@ -88,23 +100,6 @@ class CreateWidget extends React.Component {
 				return Preview1;
 		}
 	}
-	/*WidgetGet() {
-		var myurl5 = "http://54.149.159.111/user/widget";
-		var myReq5 = new XMLHttpRequest();
-		myReq5.onreadystatechange = function() {
-		  if(myReq5.readyState === 4 && myReq5.status === 200) {
-		        console.log(JSON.parse(myReq5.response));
-		  };
-		}
-		myReq5.open('GET', myurl5, true);
-		myReq5.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-		myReq5.withCredentials = true;
-		//btn5.addEventListener('click', function() {
-		  //this.style.display = 'none';
-		myReq5.setRequestHeader("AT", myReq4.getResponseHeader("AT"));
-		myReq5.send();
-		});
-	}*/
 
 
 
@@ -141,7 +136,8 @@ class CreateWidget extends React.Component {
 					</div>
 					<div className="col-sm-10">
 						{/*Widget code*/}
-						<textarea rows={8} cols={70} className="textarea" defaultValue={"widget code here"} /><br />
+						<textarea rows={8} cols={70} className="textarea" defaultValue={this.state.myArray} /><br />
+						<textarea rows={8} cols={70} className="textarea" defaultValue={this.state.myWidget} /><br />
 						For more help with implementing the code, please see our Code Implementation Guide.<br />
 						Widget may take up to two hours to appear on site.
 					</div>
