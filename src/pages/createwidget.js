@@ -48,7 +48,7 @@ class CreateWidget extends React.Component {
 			this.setState(
 				{ myWidget:  Object.values(this.state.myArray)[0]}
 			);
-			console.log(Object.values(this.state.myArray)[0]);
+			// console.log(Object.values(this.state.myArray)[0]);
 			console.log(this.state.myWidget);
 		})
 		// .catch((err)=> {
@@ -102,7 +102,15 @@ class CreateWidget extends React.Component {
 	}
 
 
-
+	// render() {
+// 		return (
+// 			<div>
+// 				<h1>hi</h1>
+// 				<h1>{this.state.myWidget.toString()}</h1>
+// 			</div>
+// 		)
+// 	}
+// }
 	render() {
 		return(
 			<div className="container-fluid">
@@ -135,9 +143,16 @@ class CreateWidget extends React.Component {
 						<p className="p-col">Widget code</p>
 					</div>
 					<div className="col-sm-10">
+		 				<p>{this.state.myWidget.toString()}</p>
+					</div>
+				</div>
+				<div className="row">
+					<div className="col-sm-2">
+						<p className="p-col">Widget code</p>
+					</div>
+					<div className="col-sm-10">
 						{/*Widget code*/}
-						<textarea rows={8} cols={70} className="textarea" defaultValue={this.state.myArray} /><br />
-						<textarea rows={8} cols={70} className="textarea" defaultValue={this.state.myWidget} /><br />
+						<textarea rows={8} cols={70} className="textarea" defaultValue={"YourWidgetHere"} /><br />
 						For more help with implementing the code, please see our Code Implementation Guide.<br />
 						Widget may take up to two hours to appear on site.
 					</div>
