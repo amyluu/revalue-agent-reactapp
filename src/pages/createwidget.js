@@ -36,8 +36,8 @@ class CreateWidget extends React.Component {
 	componentWillMount() {
 	// WidgetGet() {
 	// // WidgetGet() 
-		axios.get('http://54.149.159.111/user/widget', {
-		// axios.get('http://localhost:5000/user/widget', {
+		// axios.get('http://54.149.159.111/user/widget', {
+		axios.get('http://localhost:5000/user/widget', {
 			headers: {AT: this.state.myToken.value}
 		})
 		.then(({ data })=> {
@@ -143,16 +143,7 @@ class CreateWidget extends React.Component {
 						<p className="p-col">Widget code</p>
 					</div>
 					<div className="col-sm-10">
-		 				<p>{this.state.myWidget.toString()}</p>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-sm-2">
-						<p className="p-col">Widget code</p>
-					</div>
-					<div className="col-sm-10">
-						{/*Widget code*/}
-						<textarea rows={8} cols={70} className="textarea" defaultValue={"YourWidgetHere"} /><br />
+						<textarea rows={8} cols={70} className="textarea" value={this.state.myWidget.toString()} readonly /><br />
 						For more help with implementing the code, please see our Code Implementation Guide.<br />
 						Widget may take up to two hours to appear on site.
 					</div>

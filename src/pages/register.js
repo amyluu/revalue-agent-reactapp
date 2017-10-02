@@ -20,8 +20,8 @@ class Register extends Component {
 		}
 
 		CreateUserPost() {
-			axios.post('http://54.149.159.111/create/user', {
-			// axios.post('http://localhost:5000/create/user', {
+			// axios.post('http://54.149.159.111/create/user', {
+			axios.post('http://localhost:5000/create/user', {
 				email: this.state.email.value,
 				password: this.state.password.value
 			})
