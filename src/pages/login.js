@@ -13,7 +13,6 @@ class Login extends Component {
 			this.state = {
 				email: {value: '', isValid: true, message: ''},
 				password: {value: '', isValid: true, message: ''}
-				// authToken: '',
 			};
 	  }
 
@@ -25,7 +24,6 @@ class Login extends Component {
 				password: this.state.password.value
 			})
 			.then(function (response) {
-				// console.log(response)
 				const cookies = new Cookies()
 				cookies.set('AT', response.headers.at, {path: '/'})
 				// cookies.set('AT', self.state.authToken, {path: '/'})
@@ -35,10 +33,18 @@ class Login extends Component {
 				//console.log(results.data);
 				//console.log(results.headers.at);
 				//console.log(this.state.authToken)
+				// if (response.status === 404) { 
+				// 	this.handle404()
+				// }
 			})
 			.catch(function (error) {
-    			console.log(error)
+				// if(error.status === 404) { this.handle404() }
+    			// console.log(error)
  			})
+		}
+
+		handle404(){
+			this.props.history.push('/');
 		}
 
 	  handleClick(e) {

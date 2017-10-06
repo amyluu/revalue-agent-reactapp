@@ -26,10 +26,11 @@ class Register extends Component {
 				password: this.state.password.value
 			})
 			.then(function (response) {
-				// console.log(response);
+				const cookies = new Cookies()
+				cookies.set('AT', response.headers.at, {path: '/'})
 			})
 			.catch(function (error) {
-				console.log(error);
+				// console.log(error);
 			})
 		}
 

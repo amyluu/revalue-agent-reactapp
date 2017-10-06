@@ -49,13 +49,13 @@ class CreateWidget extends React.Component {
 				{ myWidget:  Object.values(this.state.myArray)[0]}
 			);
 			// console.log(Object.values(this.state.myArray)[0]);
-			console.log(this.state.myWidget);
+			// console.log(this.state.myWidget);
 		})
 		// .catch((err)=> {
 			// console.log(error)
 		// })
 		.catch(function (error) {
-			console.log(error)
+			// console.log(error)
  		})
 	}
 

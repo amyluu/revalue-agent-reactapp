@@ -11,10 +11,12 @@ class Register2 extends Component {
 			super(props)
 			// Getting Email from cookies
 			const cookies = new Cookies()
+			var authToken = cookies.get('AT')
 			var mymail = cookies.get('email')
 			//console.log(mymail)
 			this.handleClick = this.handleClick.bind(this)
 			this.state = {
+				myToken: {value: authToken},
 				email: {value: mymail},
 				firstName: {value: '', isValid: true, message: ''},
 				lastName: {value: '', isValid: true, message: ''},
@@ -32,12 +34,15 @@ class Register2 extends Component {
 				lastname: this.state.lastName.value,
 				phone: this.state.phoneNumber.value,
 				domain: this.state.domainName.value
-			})
+			},{
+				headers: {AT: this.state.myToken.value
+				}
+		})
 			.then(function (response) {
 				// console.log(response);
 			})
 			.catch(function (error) {
-				console.log(error);
+				// console.log(error);
 			})
 		}
 
