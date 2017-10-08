@@ -19,7 +19,7 @@ class CreateWidget extends React.Component {
 		super()
 		const cookies = new Cookies()
 		var authToken = cookies.get('AT')
-		console.log(authToken)
+		// console.log(authToken)
 		this.open = this.open.bind(this)
     	this.close = this.close.bind(this)
     	this.handleDropdownSelect = this.handleDropdownSelect.bind(this)
@@ -27,25 +27,37 @@ class CreateWidget extends React.Component {
 		this.state = { 
 			showModal: false,
 			dropdownWidgetSize: 'widgetSizeSmall',
-			myToken: {value: authToken}
+			myToken: {value: authToken},
+			myArray: {},
+			myWidget: {}
 		};
 	}
 	// componentDidMount() {
 	componentWillMount() {
 	// WidgetGet() {
 	// // WidgetGet() 
-		axios.get('http://54.149.159.111/user/widget', {
-		// axios.get('http://localhost:5000/user/widget', {
+		// axios.get('http://54.149.159.111/user/widget', {
+		axios.get('http://localhost:5000/user/widget', {
 			headers: {AT: this.state.myToken.value}
 		})
-		.then(function (response) {
-			console.log(response)
+		.then(({ data })=> {
+			// console.log(Object.values(data)[0]);
+			this.setState(
+				{ myArray:  Object.values(data)[0]}
+			);
+			this.setState(
+				{ myWidget:  Object.values(this.state.myArray)[0]}
+			);
+			// console.log(Object.values(this.state.myArray)[0]);
+			// console.log(this.state.myWidget);
 		})
+		// .catch((err)=> {
+			// console.log(error)
+		// })
 		.catch(function (error) {
-			console.log(error)
+			// console.log(error)
  		})
 	}
-
 
 
 	close() {
@@ -88,26 +100,17 @@ class CreateWidget extends React.Component {
 				return Preview1;
 		}
 	}
-	/*WidgetGet() {
-		var myurl5 = "http://54.149.159.111/user/widget";
-		var myReq5 = new XMLHttpRequest();
-		myReq5.onreadystatechange = function() {
-		  if(myReq5.readyState === 4 && myReq5.status === 200) {
-		        console.log(JSON.parse(myReq5.response));
-		  };
-		}
-		myReq5.open('GET', myurl5, true);
-		myReq5.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-		myReq5.withCredentials = true;
-		//btn5.addEventListener('click', function() {
-		  //this.style.display = 'none';
-		myReq5.setRequestHeader("AT", myReq4.getResponseHeader("AT"));
-		myReq5.send();
-		});
-	}*/
 
 
-
+	// render() {
+// 		return (
+// 			<div>
+// 				<h1>hi</h1>
+// 				<h1>{this.state.myWidget.toString()}</h1>
+// 			</div>
+// 		)
+// 	}
+// }
 	render() {
 		return(
 			<div className="container-fluid">
@@ -140,8 +143,7 @@ class CreateWidget extends React.Component {
 						<p className="p-col">Widget code</p>
 					</div>
 					<div className="col-sm-10">
-						{/*Widget code*/}
-						<textarea rows={8} cols={70} className="textarea" defaultValue={"widget code here"} /><br />
+						<textarea rows={8} cols={70} className="textarea" value={this.state.myWidget.toString()} readonly /><br />
 						For more help with implementing the code, please see our Code Implementation Guide.<br />
 						Widget may take up to two hours to appear on site.
 					</div>

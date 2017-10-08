@@ -13,39 +13,17 @@ class Login extends Component {
 			this.state = {
 				email: {value: '', isValid: true, message: ''},
 				password: {value: '', isValid: true, message: ''}
-				// authToken: '',
 			};
 	  }
-		/*LoginPost() {
-		    var myurl4 = "http://54.149.159.111/login";
-		     var myReq4 = new XMLHttpRequest();
-		     myReq4.onreadystatechange = function() {
-		      if(myReq4.readyState === 4 && myReq4.status === 200) {
-		          if (myReq4.withCredentials === true ) {
-		          console.log(JSON.parse(myReq4.response));
-		          } else {
-		          console.log("doesnt work");
-		          }
-		      };
-		     }
-		     myReq4.open('POST', myurl4, true);
-		     myReq4.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); 
-		     myReq4.withCredentials = true;
-		     //this.setState({ myReq4: '' })
-		     myReq4.send(JSON.stringify({
-		     	"email":this.state.email.value, 
-		     	"password":this.state.password.value
-		     }));
-		}*/
+
 
 		AxiosPost2() {
-			axios.post('http://54.149.159.111/login', {
-			// axios.post('http://localhost:5000/login', {
+			// axios.post('http://54.149.159.111/login', {
+			axios.post('http://localhost:5000/login', {
 				email: this.state.email.value,
 				password: this.state.password.value
 			})
 			.then(function (response) {
-				console.log(response)
 				const cookies = new Cookies()
 				cookies.set('AT', response.headers.at, {path: '/'})
 				// cookies.set('AT', self.state.authToken, {path: '/'})
@@ -55,10 +33,18 @@ class Login extends Component {
 				//console.log(results.data);
 				//console.log(results.headers.at);
 				//console.log(this.state.authToken)
+				// if (response.status === 404) { 
+				// 	this.handle404()
+				// }
 			})
 			.catch(function (error) {
-    			console.log(error)
+				// if(error.status === 404) { this.handle404() }
+    			// console.log(error)
  			})
+		}
+
+		handle404(){
+			this.props.history.push('/');
 		}
 
 	  handleClick(e) {

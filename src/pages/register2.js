@@ -11,10 +11,12 @@ class Register2 extends Component {
 			super(props)
 			// Getting Email from cookies
 			const cookies = new Cookies()
+			var authToken = cookies.get('AT')
 			var mymail = cookies.get('email')
 			//console.log(mymail)
 			this.handleClick = this.handleClick.bind(this)
 			this.state = {
+				myToken: {value: authToken},
 				email: {value: mymail},
 				firstName: {value: '', isValid: true, message: ''},
 				lastName: {value: '', isValid: true, message: ''},
@@ -23,53 +25,24 @@ class Register2 extends Component {
 			};
 	  	}
 
-		// CreateUserPostNext() {
-		// // var myurl12 = "http://54.149.159.111/create/user/next";
-		// var myurl12 = "http://localhost:5000/create/user/next";
-		// var myReq12 = new XMLHttpRequest();
-		// myReq12.onreadystatechange = function() {
-		// 	if(myReq12.readyState === 4 && myReq12.status === 200) {
-		// 			if (myReq12.withCredentials === true ) {
-		// 			console.log(JSON.parse(myReq12.response));
-		// 			} else {
-		// 			console.log("doesnt work");
-		// 			}
-		// 	};
-		// }
-		// myReq12.open('POST', myurl12, true);
-		// myReq12.setRequestHeader("Content-Type", "application/json; charset=UTF-8"); 
-		// myReq12.withCredentials = true;
-		// myReq12.send(
-		// 	JSON.stringify({
-		// 		"email": this.state.email.value,
-		// 		"firstname": this.state.firstName.value,
-		// 		"lastname": this.state.lastName.value,
-		// 		"phone": this.state.phoneNumber.value,
-		// 		"domain": this.state.domainName.value
-		// 	}));
-		// }
-
-		// getEmail() {
-		// 	const cookies = new Cookies()
-		// 	cookies.get('email')
-		// 	console.log(cookies.get('email'))
-		// 	console.log(document.cookie)
-		// }
 
 		CreateUserPostNext() {
-			axios.post('http://54.149.159.111/create/user/next', {
-			// axios.post('http://localhost:5000/create/user/next', {
+			// axios.post('http://54.149.159.111/create/user/next', {
+			axios.post('http://localhost:5000/create/user/next', {
 				email: this.state.email.value,
 				firstname: this.state.firstName.value,
 				lastname: this.state.lastName.value,
 				phone: this.state.phoneNumber.value,
 				domain: this.state.domainName.value
-			})
+			},{
+				headers: {AT: this.state.myToken.value
+				}
+		})
 			.then(function (response) {
-				console.log(response);
+				// console.log(response);
 			})
 			.catch(function (error) {
-				console.log(error);
+				// console.log(error);
 			})
 		}
 
